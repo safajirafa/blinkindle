@@ -20,13 +20,23 @@ fetch('https://app.blinkist.com/en/daily/')
     }).then(body => {
       let $ = cheerio.load(body);
 
+      let $summary = $('<article>');
+
       // TODO Structure format!!!
+      $('.chapter').each(function(index) {
+        $summary.append($(this).html());
+      });
 
-      // Book title
-      let title = $('.chapter_visible h1').first().text().replace('What’s in it for me? ', '');
+      $summary.find('.promotion').empty();
 
-      console.log(title);
+      // save content to html file!
+      console.log($summary.html());
+
+      // // Book title
+      // let title = $('.chapter_visible h1')
+      //   .html()
+      //   .replace('What&#x2019;s in it for me? ', '');
     });
 
-    console.log('Today\'s book is: %s by %s', metadata.bookTitle, metadata.author);
+    //console.log('Today\'s book is: %s by %s', metadata.bookTitle, metadata.author);
   });
