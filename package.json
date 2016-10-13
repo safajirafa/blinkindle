@@ -1,0 +1,21 @@
+{
+  "name": "blinkist-hoarder",
+  "version": "1.0.0",
+  "description": "Hoard blinkist book summaries to read later",
+  "main": "src/app.js",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "node-fetch": "^1.6.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "blinkist",
+    "summary",
+    "books"
+  ],
+  "author": "safajirafa",
+  "license": "ISC"
+}
