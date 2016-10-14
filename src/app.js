@@ -1,10 +1,15 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
-const fs = require('fs');
-const fetchMetadata = require('./metadata').fetchMetadata;
 
-fetchMetadata().then(res => {
-  fetch(res.contentUrl).then(res => {
+const fetchMetadata = require('./metadata').fetchMetadata;
+const fetchContent = require('./content').fetchContent;
+
+const config = require('../config.json');
+
+const fs = require('fs');
+
+fetchMetadata().then(metadata => {
+  fetch(metadata.contentUrl).then(res => {
     return res.text();
   }).then(body => {
     let $ = cheerio.load(body);
@@ -18,15 +23,14 @@ fetchMetadata().then(res => {
 
     $summary.find('.promotion').empty();
 
-    // save content to html file!
-    console.log($summary.html());
-
     // TODO: Use the book title to name the file
     // let title = $('.chapter_visible h1')
     //   .html()
     //   .replace('What&#x2019;s in it for me? ', '');
 
-    fs.writeFile('/Users/andres.valencia/Google Drive/blinkist-hoarder/nice.html', $summary.html(), (err) => {
+    const fileName = `${config.OUTPUT_DIR}/${metadata.bookTitle.replace(/\./g, '')} - ${metadata.author}.html`;
+
+    fs.writeFile(fileName, $summary.html(), (err) => {
       if (err) {
         return console.log(err);
       }

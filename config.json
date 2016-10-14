@@ -3,5 +3,5 @@
     "HOST": "https://app.blinkist.com",
     "DAILY_URL": "https://app.blinkist.com/en/daily"
   },
-  "OUTPUT_DIR": "Users/andres.valencia/Google Drive/blinkist-hoarder"
+  "OUTPUT_DIR": "/Users/andres.valencia/Google Drive/blinkist-hoarder"
 }
