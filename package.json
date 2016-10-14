@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test"
+    "test": "node src/app.js"
   },
   "keywords": [
     "blinkist",
