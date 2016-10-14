@@ -1,49 +1,37 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const fetchMetadata = require('./metadata').fetchMetadata;
 
-fetch('https://app.blinkist.com/en/daily/')
-  .then(res => res.text())
-  .then(body => {
+fetchMetadata().then(res => {
+  fetch(res.contentUrl).then(res => {
+    return res.text();
+  }).then(body => {
     let $ = cheerio.load(body);
 
-    return {
-      author: $('.today .blinks-pack__text__author').text().trim(),
-      bookTitle: $('.today .blinks-pack__text__title').text().trim(),
-      url: $('.today .blink__button a').prop('href')
-    }
-  })
-  .then(metadata => {
-    let fullUrl = `https://app.blinkist.com${metadata.url}`;
+    let $summary = $('<article>');
 
-    fetch(fullUrl).then(res => {
-      return res.text();
-    }).then(body => {
-      let $ = cheerio.load(body);
-
-      let $summary = $('<article>');
-
-      // TODO Structure format!!!
-      $('.chapter').each(function(index) {
-        $summary.append($(this).html());
-      });
-
-      $summary.find('.promotion').empty();
-
-      // save content to html file!
-      console.log($summary.html());
-
-      // TODO: Use the book title to name the file
-      // let title = $('.chapter_visible h1')
-      //   .html()
-      //   .replace('What&#x2019;s in it for me? ', '');
-
-      fs.writeFile('/Users/andres.valencia/workspace/safajirafa/blinkist-hoarder/tmp/nice.html', $summary.html(), (err) => {
-        if (err) {
-          return console.log(err);
-        }
-      });
+    // TODO Structure format!!!
+    $('.chapter').each(function(index) {
+      $summary.append($(this).html());
     });
 
-    //console.log('Today\'s book is: %s by %s', metadata.bookTitle, metadata.author);
+    $summary.find('.promotion').empty();
+
+    // save content to html file!
+    console.log($summary.html());
+
+    // TODO: Use the book title to name the file
+    // let title = $('.chapter_visible h1')
+    //   .html()
+    //   .replace('What&#x2019;s in it for me? ', '');
+
+    fs.writeFile('/Users/andres.valencia/Google Drive/blinkist-hoarder/nice.html', $summary.html(), (err) => {
+      if (err) {
+        return console.log(err);
+      }
+    });
   });
+
+  //console.log('Today\'s book is: %s by %s', metadata.bookTitle, metadata.author);
+});
