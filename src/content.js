@@ -8,13 +8,13 @@ module.exports.fetchContent = (metadata) => {
     fetch(metadata.contentUrl)
       .then(res => res.text())
       .then(body => {
-        const $ = cheerio.load(body);
+        let $ = cheerio.load(body);
 
         let $summary = $('<article>');
 
         //Append chapters to $summary element
-        $('.chapter').each(() => {
-          $summary.append($(this).html());
+        $('.chapter').each((index, el) => {
+          $summary.append($(el).html());
         });
 
         // No promo info bro :stuck_out_tongue:
