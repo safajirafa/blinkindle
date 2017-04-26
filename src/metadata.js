@@ -8,9 +8,9 @@ module.exports.fetchMetadata = () => {
       .then(res => res.text())
       .then(body => {
         const $ = cheerio.load(body);
-        const author = $('.today .blinks-pack__text__author').text().trim();
-        const bookTitle = $('.today .blinks-pack__text__title').text().trim();
-        const contentPath = $('.today .blink__button a').prop('href');
+        const author = $('.dailyV2__free-book__author').text().trim();
+        const bookTitle = $('.dailyV2__free-book__title').text().trim();
+        const contentPath = $('.dailyV2__free-book__cta a').prop('href');
 
         resolve({
           author: author,
