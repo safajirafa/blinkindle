@@ -5,11 +5,12 @@
   "main": "src/app.js",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "epub-gen": "0.0.17",
     "node-fetch": "^1.6.3"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node src/app.js"
+    "generate": "node src/app.js"
   },
   "keywords": [
     "blinkist",
