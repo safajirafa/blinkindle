@@ -8,8 +8,11 @@
     "epub-gen": "0.0.17",
     "node-fetch": "^1.6.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^20.0.3"
+  },
   "scripts": {
+    "test": "jest",
     "generate": "node src/app.js"
   },
   "keywords": [
