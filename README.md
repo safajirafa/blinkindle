@@ -12,5 +12,4 @@ Edit the `OUTPUT_DIR` on your config.json to store the _blink_ content. You coul
 npm start
 ```
 
-Finally: Get something to read!
-
+Finally: Get something to read! 📙
