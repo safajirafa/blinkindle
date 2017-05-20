@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/safajirafa/blinkindle.svg?branch=master)](https://travis-ci.org/safajirafa/blinkindle)
+
 ### Save daily [Blinkist](https://app.blinkist.com/en/daily/) content
 
 ```bash
